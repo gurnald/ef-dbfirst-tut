@@ -15,15 +15,12 @@ public class CustomersController {
     public CustomersController() {
         _context = new SalesDbContext();
     }
-
     public async Task<List<Customer>> GetAllAsync() {
         return await _context.Customers.ToListAsync();
-
     }
 
     public async Task<Customer> GetByIdAsync(int id) {
         return await _context.Customers.FindAsync(id);
-
     }
 
     public async Task<bool> InsertAsync(Customer cust) {
@@ -31,8 +28,7 @@ public class CustomersController {
        var changes = await _context.SaveChangesAsync();
         return (changes == 1) ? true : false;
     }
-
-
+    
     public async Task<bool> UpdateAsync(Customer cust) {
         var customers = await _context.Customers.FindAsync(cust.Id);
         if (customers is null) {

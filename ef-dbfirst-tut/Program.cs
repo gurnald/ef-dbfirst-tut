@@ -1,13 +1,50 @@
 ﻿using ef_dbfirst_tut;
 using ef_dbfirst_tut.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Channels;
+
+var ordlCtrl = new OrdersController();
+
+var ord = await ordlCtrl.GetByIdAsync(1);
+
+Console.WriteLine(ord);
 
 
-var custCtrl = new CustomersController();
+var orderTotal = ord.OrderLines.Sum(x => x.Price * x.Quantity);
 
-var success = await custCtrl.DeleteAsync(39);
+Console.WriteLine($"Order total is {orderTotal:C}");
 
-Console.WriteLine(success ? "OK" : "FAILED");
+//var ordLine = new OrderLine() {
+//    Id = 0 ,
+//    OrdersId = 1 ,
+//    Product = "GEFORCE 4070",
+//    Description = "Herschels 4070ti" ,
+//    Quantity = 3 ,
+//    Price = 100
+//
+//};
+
+//await ordCtrl.InsertAsync(ordLine);
+
+//ordLines.ForEach(ord => Console.WriteLine(ord));
+
+//var order = new Order() {
+//    Id = 0,
+//    Date = new DateTime(2023 , 2 , 23),
+//    Description = "New Kroger Order",
+//    CustomerId = 1
+//};
+
+//bool success = await ordCtrl.DeleteAsync(27);
+//Console.WriteLine(success ? "It updated" : "booooooo!!!");
+
+
+
+//var custCtrl = new CustomersController();
+//
+//var success = await custCtrl.DeleteAsync(39);
+//
+//Console.WriteLine(success ? "OK" : "FAILED");
 
 
 
